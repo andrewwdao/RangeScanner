@@ -26,14 +26,29 @@ Servolib::~Servolib(void) {     // destructor
 void Servolib::init(int ser) {
     this->servo1 = ser;
     pinMode(this->servo1,OUTPUT);
-    this->move(DEFAULT_ANGLE);
+    // move to default angle
+    int tbuffer = map(DEFAULT_ANGLE, 0, 180, MIN_PULSE, MAX_PULSE);
+    for (int i=0; i<30;i++) { // 20*REPEAT_CYCLE ms
+        digitalWrite(this->servo1,HIGH);
+        delayMicroseconds(tbuffer);
+        digitalWrite(this->servo1,LOW);
+        delayMicroseconds(T_TOTAL-tbuffer);
+    }
 }
 void Servolib::init(int ser1, int ser2) {
     this->servo1 = ser1;
     this->servo2 = ser2;
     pinMode(this->servo1,OUTPUT);
     pinMode(this->servo2,OUTPUT);
-    this->move(DEFAULT_ANGLE,DEFAULT_ANGLE);
+    int tbuffer = map(DEFAULT_ANGLE, 0, 180, MIN_PULSE, MAX_PULSE);
+    for (int i=0; i<30;i++) { // 20*REPEAT_CYCLE ms
+        digitalWrite(this->servo1,HIGH);
+        digitalWrite(this->servo2,HIGH);
+        delayMicroseconds(tbuffer);
+        digitalWrite(this->servo1,LOW);
+        digitalWrite(this->servo2,LOW);
+        delayMicroseconds(T_TOTAL-tbuffer);
+    }
 }
 void Servolib::movepulse(int tbuffer) {
     tbuffer = (tbuffer<MIN_PULSE)?MIN_PULSE:((tbuffer>MAX_PULSE)?MAX_PULSE:tbuffer);
