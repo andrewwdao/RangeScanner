@@ -37,7 +37,7 @@ void Servolib::init(int ser1, int ser2) {
 }
 void Servolib::movepulse(int tbuffer) {
     tbuffer = (tbuffer<MIN_PULSE)?MIN_PULSE:((tbuffer>MAX_PULSE)?MAX_PULSE:tbuffer);
-    for (int i=0; i<REPEAT_CYCLE;i++) { // 40ms
+    for (int i=0; i<REPEAT_CYCLE;i++) { // 20*REPEAT_CYCLE ms
         digitalWrite(this->servo1,HIGH);
         delayMicroseconds(tbuffer);
         digitalWrite(this->servo1,LOW);
@@ -59,7 +59,7 @@ void Servolib::movepulse(int tbuffer1, int tbuffer2) {
       	max_tbuffer = tbuffer2; max_servo = this->servo2;
     }
     int middle_tbuffer = max_tbuffer-min_tbuffer;
-    for (int i=0; i<50;i++) { // 1000ms
+    for (int i=0; i<REPEAT_CYCLE;i++) { // 1000ms
         digitalWrite(this->servo1,HIGH);
         digitalWrite(this->servo2,HIGH);
         delayMicroseconds(min_tbuffer);

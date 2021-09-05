@@ -25,7 +25,7 @@ pl.XDataSource = 'dat_angle';
 pl.YDataSource = 'dat_sonic';
 
 % init the serial port
-ser = serialport("COM3",9600,'Timeout',2);
+ser = serialport("COM8",115200,'Timeout',2);
 
 % define the pattern
 pat_reg = "[0-9].?[0-9]+"; %[0-9].?[0-9]+

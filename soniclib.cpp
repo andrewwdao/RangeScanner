@@ -12,7 +12,7 @@
 
 #include "soniclib.h"
 
-#define MAX_TIMEOUT 10000 //us
+#define MAX_TIMEOUT 7000 //us
 
 /**
  * @brief Constructor/Destructor
